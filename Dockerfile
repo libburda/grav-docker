@@ -21,7 +21,6 @@ RUN apk add --no-cache \
         php7-xml \
         nginx \
         tini \
-        cron \
     && mkdir /var/run/nginx/ \
     && mkdir /var/run/php-fpm7/ \
     && chown nginx:nginx /var/run/nginx \
@@ -58,7 +57,7 @@ RUN wget -O grav-admin.zip https://getgrav.org/download/core/grav-admin/${GRAV_V
 
 COPY --chown=nginx:nginx entrypoint.sh /
 COPY --chown=nginx:nginx nginx/nginx.conf nginx/common.conf /etc/nginx/
-COPY --chown=nginx:nginx nginx/conf.d/* /etc/nginx/conf.d
+COPY --chown=nginx:nginx nginx/conf.d/* /etc/nginx/conf.d/
 
 USER nginx
 WORKDIR /var/www/html
