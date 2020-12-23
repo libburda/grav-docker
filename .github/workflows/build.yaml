@@ -1,9 +1,9 @@
-name: Build
+name: build
 on:
   schedule:
     - cron: '0 5 * * *' # everyday at 5am
 jobs:
-  docker:
+  build:
     runs-on: ubuntu-latest
     steps:
       -
