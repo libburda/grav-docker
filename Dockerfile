@@ -57,7 +57,7 @@ RUN wget -O grav-admin.zip https://getgrav.org/download/core/grav-admin/${GRAV_V
 
 COPY --chown=nginx:nginx entrypoint.sh /
 COPY --chown=nginx:nginx nginx/nginx.conf nginx/common.conf /etc/nginx/
-COPY --chown=nginx:nginx nginx/conf.d/* /etc/nginx/conf.d/
+COPY --chown=nginx:nginx nginx/conf.d/default.conf /etc/nginx/conf.d/default.conf
 
 USER nginx
 WORKDIR /var/www/html
