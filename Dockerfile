@@ -19,6 +19,7 @@ RUN apk add --no-cache \
         php7-dom \
         php7-openssl \
         php7-xml \
+        php7-simplexml \
         nginx \
         tini \
     && mkdir /var/run/nginx/ \
