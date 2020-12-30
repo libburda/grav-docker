@@ -19,7 +19,18 @@ RUN apk add --no-cache \
         php7-dom \
         php7-openssl \
         php7-xml \
+        php7-xmlreader \
+        php7-xmlwriter \
+        php7-ctype \
         php7-simplexml \
+        php7-sodium \
+        php7-tokenizer \
+        php7-iconv \
+        php7-opcache \
+        php7-fileinfo \
+        php7-ftp \
+        php7-phar \
+        php7-posix \
         nginx \
         tini \
     && mkdir /var/run/nginx/ \
@@ -57,7 +68,7 @@ RUN wget -O grav-admin.zip https://getgrav.org/download/core/grav-admin/${GRAV_V
     && rm grav-admin.zip
 
 COPY --chown=nginx:nginx entrypoint.sh /
-COPY --chown=nginx:nginx nginx/nginx.conf nginx/common.conf /etc/nginx/
+COPY --chown=nginx:nginx nginx/nginx.conf /etc/nginx/
 COPY --chown=nginx:nginx nginx/conf.d/default.conf /etc/nginx/conf.d/default.conf
 
 USER nginx
