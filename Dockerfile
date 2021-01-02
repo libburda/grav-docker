@@ -2,6 +2,7 @@ FROM docker.io/alpine:3.12
 
 # Define Grav specific version of Grav or use latest stable
 ENV GRAV_VERSION latest
+ENV PERSISTENT_DIR="/var/lib/grav/user-data"
 
 RUN apk add --no-cache \
         unzip \
@@ -39,7 +40,9 @@ RUN apk add --no-cache \
     && chown nginx:nginx /var/run/php-fpm7 \
     && mkdir /var/lib/php7/session \
     && chown -R nginx:nginx /var/lib/php7 \
-    && chown -R nginx:nginx /var/lib/nginx
+    && chown -R nginx:nginx /var/lib/nginx \
+    && mkdir /var/lib/grav \
+    && chown nginx:nginx /var/lib/grav
 
 # Set recommended PHP.ini settings
 # see https://secure.php.net/manual/en/opcache.installation.php
