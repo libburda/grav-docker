@@ -4,7 +4,7 @@
 if [ -d "$PERSISTENT_DIR" ]; then
     echo "$0: $PERSISTENT_DIR exists"
     # If persistent directory is empty, copy default content to it
-    if [ ! "$(ls -A "$PERSISTENT_DIR")" ]; then
+    if [ ! "$(ls "$PERSISTENT_DIR")" ]; then
         echo "$0: Copying default user dir to $PERSISTENT_DIR"
         cp -r /var/www/html/user/* "$PERSISTENT_DIR"
     fi
