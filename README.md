@@ -1,6 +1,6 @@
 # Docker image for Grav CMS
 
-[![Build Status](https://cloud.drone.io/api/badges/libburda/grav-docker/status.svg)](https://cloud.drone.io/libburda/grav-docker)
+[![Build Status](https://cloud.drone.io/api/badges/liborburda/grav-docker/status.svg)](https://cloud.drone.io/liborburda/grav-docker)
 
 ## Build
 ```

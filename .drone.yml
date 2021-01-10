@@ -7,6 +7,9 @@ trigger:
     - master
   repo:
     - getgrav/grav
+    - liborburda/grav
+  event:
+    - push
 
 steps:
   - name: docker
@@ -16,5 +19,5 @@ steps:
         from_secret: docker_username
       password:
         from_secret: docker_password
-      repo: libburda/grav
+      repo: liborburda/grav
       tags: latest
