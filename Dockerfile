@@ -2,7 +2,6 @@ FROM docker.io/alpine:3.12
 
 # Define Grav specific version of Grav or use latest stable
 ENV GRAV_VERSION latest
-ENV PERSISTENT_DIR="/var/lib/grav/user-data"
 
 RUN apk add --no-cache \
         unzip \
@@ -33,16 +32,15 @@ RUN apk add --no-cache \
         php7-phar \
         php7-posix \
         nginx \
-        tini \
-    && mkdir /var/run/nginx/ \
+        tini
+
+RUN mkdir /var/run/nginx/ \
     && mkdir /var/run/php-fpm7/ \
     && chown nginx:nginx /var/run/nginx \
     && chown nginx:nginx /var/run/php-fpm7 \
     && mkdir /var/lib/php7/session \
     && chown -R nginx:nginx /var/lib/php7 \
-    && chown -R nginx:nginx /var/lib/nginx \
-    && mkdir /var/lib/grav \
-    && chown nginx:nginx /var/lib/grav
+    && chown -R nginx:nginx /var/lib/nginx
 
 # Set recommended PHP.ini settings
 # see https://secure.php.net/manual/en/opcache.installation.php
@@ -62,13 +60,6 @@ RUN { \
     && sed -i 's#^;pid.*$#pid = /var/run/php-fpm7/php-fpm7.pid#' /etc/php7/php-fpm.conf \
     && sed -i 's#^;access\.log.*$#access.log = /proc/self/fd/2#' /etc/php7/php-fpm.d/www.conf \
     && sed -i 's#^listen.*$#listen = /var/run/php-fpm7/php-fpm7.sock#' /etc/php7/php-fpm.d/www.conf
-
-# Install grav
-RUN wget -O grav-admin.zip https://getgrav.org/download/core/grav-admin/${GRAV_VERSION} \
-    && unzip grav-admin.zip \
-    && mv grav-admin /var/www/html \
-    && chown -R nginx:nginx /var/www/html \
-    && rm grav-admin.zip
 
 COPY --chown=nginx:nginx entrypoint.sh /
 COPY --chown=nginx:nginx nginx/nginx.conf /etc/nginx/

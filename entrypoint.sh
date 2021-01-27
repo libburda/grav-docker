@@ -1,17 +1,13 @@
 #!/bin/sh
 
-# Check if persistent volume is mounted
-if [ -d "$PERSISTENT_DIR" ]; then
-    echo "$0: $PERSISTENT_DIR exists"
-    # If persistent directory is empty, copy default content to it
-    if [ ! -d "$PERSISTENT_DIR/accounts" ]; then
-        echo "$0: Copying default user dir to $PERSISTENT_DIR"
-        cp -r /var/www/html/user/* "$PERSISTENT_DIR"
-    fi
-    # Link persistent directory to /var/www/html/user
-    echo "$0: Linking $PERSISTENT_DIR to /var/www/html/user"
-    rm -r /var/www/html/user
-    ln -sf "$PERSISTENT_DIR" /var/www/html/user
+if [ ! "$(ls "/var/www/html")" ]; then
+    # Install grav
+    echo "$0: Installing grav"
+    cd /tmp \
+        && wget -O grav-admin.zip https://getgrav.org/download/core/grav-admin/${GRAV_VERSION} \
+        && unzip -q grav-admin.zip \
+        && mv grav-admin/* /var/www/html \
+        && rm grav-admin.zip
 fi
 
 php-fpm7 -F &

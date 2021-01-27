@@ -15,11 +15,7 @@ docker run --name grav liborburda/grav:latest
 ```
 
 ## Persistent storage
-Persistent directory for `user` data is located in /var/lib/grav/user-data.
-This directory is symlinked to `/var/www/html/user` during startup.
-
-During first start, default content of `user` directory is copied
-to this persistent directory (only if it's not empty).
+For persistence, mount docker volume to `/var/www/html`. If this directory is empty during start, new Grav installation will be created there.
 ```
-docker run --name grav -v data:/var/lib/grav/user-data liborburda/grav:latest
+docker run --name grav -v data:/var/www/html localhost/grav
 ```
