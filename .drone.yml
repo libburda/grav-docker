@@ -6,7 +6,7 @@ trigger:
   branch:
     - master
   repo:
-    - getgrav/grav
+    - liborburda/grav-docker
   event:
     - push
 
