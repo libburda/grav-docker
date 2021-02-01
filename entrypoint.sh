@@ -1,6 +1,6 @@
 #!/bin/sh
 
-if [ ! "$(ls "/var/www/html")" ]; then
+if [ ! -f '/var/www/html/index.php' ]; then
     # Install grav
     echo "$0: Installing grav"
     cd /tmp \
